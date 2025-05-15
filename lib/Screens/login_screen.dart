@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_practice/Screens/home_page.dart';
 import 'package:firebase_practice/Screens/signup.dart';
+import 'package:firebase_practice/uitils/tostmessae.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +20,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController txt2 = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   Future<void> _login() async{
 if(_formkey.currentState!.validate()){
-print("Hello");
+try {
+  await _auth.signInWithEmailAndPassword(email: txt1.text, password: txt2.text).then((value){
+tostmsg().message("Login Successfully "+value.user!.email.toString());
+Navigator.push(context,MaterialPageRoute(builder: (context)=> HomePage()));
+  });
+} catch (e){
+
+}
 }
   }
 
@@ -35,7 +47,8 @@ print("Hello");
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
+Text("Login Here ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50 ),),
+            SizedBox(height: 30,),
             Form(
               key: _formkey,
               child: Padding(
@@ -43,6 +56,7 @@ print("Hello");
                 child: Column(
                   children: [
                     Mytextfield(
+                      icon: Icon(Icons.lock),
                       name: "Email",
                       textEditingController: txt1,
                       hintext: "Enter Email here",
@@ -53,6 +67,7 @@ print("Hello");
                       },),
                     SizedBox(height: 15),
                   Mytextfield(
+                    icon: Icon(Icons.alternate_email),
                     name: "Password",
                   textEditingController: txt2,
                   hintext: "Enter Email here",
@@ -66,13 +81,17 @@ print("Hello");
                       ontap: _login,
                       ),
                     ),
-                  Row(
-                    children: [
-                      Text("If you dont have Acoount"),
-                      TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Signup()),);
-                      }, child: Text("signup"))
-                    ],
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text("If you dont have Acoount"),
+                        TextButton(onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Signup()),);
+                        }, child: Text("signup"))
+                      ],
+                    ),
                   )
                   
                   ],
