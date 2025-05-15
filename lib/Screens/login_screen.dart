@@ -1,5 +1,9 @@
+import 'package:firebase_practice/Screens/signup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../Components/mybutton.dart';
+import '../Components/mytextfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,6 +17,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController txt2 = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  Future<void> _login() async{
+if(_formkey.currentState!.validate()){
+print("Hello");
+}
+  }
+
 
 
 
@@ -25,43 +35,46 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(child: Text("Login here")),
+
             Form(
               key: _formkey,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: txt1,
-                      decoration: _inputDecoration("Email", 'Enter Email here'),
-                    ),
+                    Mytextfield(
+                      name: "Email",
+                      textEditingController: txt1,
+                      hintext: "Enter Email here",
+                      validator:(value) {
+                        if (value!.isEmpty) {
+                          return "Enter Corrrect email";
+                        } return null;
+                      },),
                     SizedBox(height: 15),
-                    TextFormField(
-                      controller: txt2,
-                      decoration: _inputDecoration(
-                        "Password",
-                        'Enter Password here',
-                      ),
+                  Mytextfield(
+                    name: "Password",
+                  textEditingController: txt2,
+                  hintext: "Enter Email here",
+                    validator: (value)=>value!.length <6 ?
+                      "Enter 6 digit password" : null,
                     ),
                     SizedBox(height: 15),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: InkWell(
-                        onTap: (){},
-                        child: Container(
-                          
-                          child: Center(child: Text("Login ")),
-                          height: 50,
-                          width: double.infinity,
-                          
-                          decoration: BoxDecoration(color: Colors.grey,
-                            borderRadius: BorderRadius.circular(12)
-                          
-                          ),
-                        ),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Mybutton(name: "login",
+                      ontap: _login,
                       ),
                     ),
+                  Row(
+                    children: [
+                      Text("If you dont have Acoount"),
+                      TextButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> Signup()),);
+                      }, child: Text("signup"))
+                    ],
+                  )
+                  
                   ],
                 ),
               ),
@@ -73,15 +86,3 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-InputDecoration _inputDecoration(String name, hinttext) {
-  return InputDecoration(
-    labelText: name,
-    filled: true,
-    focusColor: Colors.black,
-    hintText: hinttext,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Colors.black),
-    ),
-  );
-}
