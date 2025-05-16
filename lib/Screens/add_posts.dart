@@ -11,19 +11,16 @@ class AddPosts extends StatefulWidget {
 }
 
 class _AddPostsState extends State<AddPosts> {
-  final ref=FirebaseDatabase.instance.ref("Posts");
+  final ref = FirebaseDatabase.instance.ref("Posts");
   final TextEditingController text1 = TextEditingController();
-  bool isloading=false;
+  bool isloading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title:Text("Add Posts here"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text("Add Posts here"), centerTitle: true),
       body: Column(
         children: [
-          SizedBox(height: 30,),
+          SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: TextFormField(
@@ -32,38 +29,44 @@ class _AddPostsState extends State<AddPosts> {
               decoration: InputDecoration(
                 hintText: "What si in your mindd",
                 border: OutlineInputBorder(),
-
               ),
             ),
           ),
-          SizedBox(height: 30,),
+          SizedBox(height: 30),
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Mybutton(  isloading :isloading ,name: "Submit", ontap: (){
-              setState(() {
-                isloading=true;
-              });
-              ref.child('2').set({
-                'id': 2,
-                'Name' :'Ismail',
-                'deatils': text1.text.toString(),
-              }
-              ).then( (value){
-tostmsg().message("Submission Successfully");
+            child: Mybutton(
+              isloading: isloading,
+              name: "Submit",
+              ontap: () {
                 setState(() {
-                  isloading=false;
+                  isloading = true;
                 });
-              })..onError((error,stack){
-                tostmsg().message(error.toString());
+                ref
+                  .child('2')
+                  .set({
+                    'id': 2,
+                    'Name': 'Ismail',
+                    'deatils': text1.text.toString(),
+                  })
+                  .then((value) {
+                    tostmsg().message("Submission Successfully");
+                    setState(() {
+                      isloading = false;
+                    });
+                  })..onError((error, stack) {
+                  tostmsg().message(error.toString());
 
-                setState(() {
-                  isloading=false;
+                  setState(() {
+                    isloading = false;
+                  });
                 });
-              });
-            } ),
-          )
+              },
+            ),
+          ),
         ],
       ),
-    ); }
+    );
+  }
 }
