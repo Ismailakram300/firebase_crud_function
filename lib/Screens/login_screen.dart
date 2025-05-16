@@ -26,8 +26,10 @@ class _LoginScreenState extends State<LoginScreen> {
 if(_formkey.currentState!.validate()){
 try {
   await _auth.signInWithEmailAndPassword(email: txt1.text, password: txt2.text).then((value){
-tostmsg().message("Login Successfully "+value.user!.email.toString());
+
 Navigator.push(context,MaterialPageRoute(builder: (context)=> HomePage()));
+  }).onError((error, stackTrace)  {
+   tostmsg().message(error.toString());
   });
 } catch (e){
 
@@ -92,8 +94,22 @@ Text("Login Here ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50 ),
                         }, child: Text("signup"))
                       ],
                     ),
-                  )
-                  
+                  ),
+                    SizedBox(height: 20,),
+                    InkWell(
+                      onTap: (){
+Navigator.push(context, MaterialPageRoute(builder: (context)=> ))
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.black)
+                        ),
+                        child: Center(child: Text("Signup with phone ")),
+                      ),
+                    ),
                   ],
                 ),
               ),
