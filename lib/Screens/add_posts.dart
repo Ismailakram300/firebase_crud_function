@@ -1,4 +1,6 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_practice/Components/mybutton.dart';
+import 'package:firebase_practice/uitils/tostmessae.dart';
 import 'package:flutter/material.dart';
 
 class AddPosts extends StatefulWidget {
@@ -9,7 +11,9 @@ class AddPosts extends StatefulWidget {
 }
 
 class _AddPostsState extends State<AddPosts> {
+  final ref=FirebaseDatabase.instance.ref("Posts");
   final TextEditingController text1 = TextEditingController();
+  bool isloading=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +40,28 @@ class _AddPostsState extends State<AddPosts> {
 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Mybutton(name: "Submit", ontap: (){
+            child: Mybutton(  isloading :isloading ,name: "Submit", ontap: (){
+              setState(() {
+                isloading=true;
+              });
+              ref.child('2').set({
+                'id': 2,
+                'Name' :'Ismail',
+                'deatils': text1.text.toString(),
+              }
+              ).then( (value){
+tostmsg().message("Submission Successfully");
+                setState(() {
+                  isloading=false;
+                });
+              })..onError((error,stack){
+                tostmsg().message(error.toString());
 
-            }),
+                setState(() {
+                  isloading=false;
+                });
+              });
+            } ),
           )
         ],
       ),

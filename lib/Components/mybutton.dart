@@ -14,7 +14,7 @@ class Mybutton extends StatelessWidget {
       onTap: ontap,
       child: Container(
 
-        child: isloading ? CircularProgressIndicator(strokeWidth: 3,color: Colors.white,): Center(child: Text(name)),
+        child:  Center(child:isloading ? CircularProgressIndicator(strokeWidth: 3,color: Colors.white,): Text(name)),
         height: 50,
         decoration: BoxDecoration(color: Colors.green.shade200,
             borderRadius: BorderRadius.circular(12)
