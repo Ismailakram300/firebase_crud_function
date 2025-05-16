@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_practice/Screens/add_posts.dart';
 import 'package:firebase_practice/Screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         automaticallyImplyLeading: false,
         actions: [
+
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: (){
@@ -31,7 +33,13 @@ class _HomePageState extends State<HomePage> {
           ),
 
         ],
+
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Navigator.push(context,MaterialPageRoute(builder: (context)=> AddPosts()));
+        
+      },
+      child: Icon(Icons.add),),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
