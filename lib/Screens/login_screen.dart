@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../Components/mybutton.dart';
 import '../Components/mytextfield.dart';
+import 'login_with_phone.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -98,7 +99,7 @@ Text("Login Here ",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50 ),
                     SizedBox(height: 20,),
                     InkWell(
                       onTap: (){
-Navigator.push(context, MaterialPageRoute(builder: (context)=> ))
+Navigator.push(context, MaterialPageRoute(builder: (context)=>  LoginWithPhone()));
                       },
                       child: Container(
                         height: 50,
