@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                                   });
                                   ref.child(id).remove().then((value) {
                                     tostmsg().message(
-                                        "Data delete Successfully");
+                                        "Data delete Successfully ");
                                   });
                                 },
                               ),
