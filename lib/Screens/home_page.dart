@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+final searchCtrl =TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Posts');
