@@ -81,8 +81,8 @@ String searchquery ='';
                         itemBuilder: (context,index){
                       return ListTile(
                         title: Text(filteredList[index]['details'].toString()),
-                        ic
                         trailing: PopupMenuButton(
+                          icon: Icons.edit,
                             itemBuilder: (context)=>[
                           PopupMenuItem(child: ListTile(
                             title: Text('Edit'),
