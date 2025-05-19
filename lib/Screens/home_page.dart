@@ -47,20 +47,23 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(child: FirebaseAnimatedList(
-                query: ref,
-                itemBuilder: (context,snapshot,animation,index,){
-                  return Container(
-                    height: 100,
-                    child: Card(
-
-                      color: Colors.deepPurple.shade50,
-
-                      child:  Center(child: Text(snapshot.child('details').value.toString())),
-
-                    ),
-                  );
-                }))
+            Expanded(
+              child: StreamBuilder(stream: stream, builder: builder),
+                //  child: FirebaseAnimatedList(
+                // query: ref,
+                // itemBuilder: (context,snapshot,animation,index,){
+                //   return Container(
+                //     height: 100,
+                //     child: Card(
+                //
+                //       color: Colors.deepPurple.shade50,
+                //
+                //       child:  Center(child: Text(snapshot.child('details').value.toString())),
+                //
+                //     ),
+                //   );
+                // }),
+            ),
           ],
         ),
       ),
