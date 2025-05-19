@@ -40,13 +40,14 @@ class _AddPostsState extends State<AddPosts> {
               isloading: isloading,
               name: "Submit",
               ontap: () {
+                String id=DateTime.now().millisecondsSinceEpoch.toString();
                 setState(() {
                   isloading = true;
                 });
                 ref
-                  .child(DateTime.now().millisecondsSinceEpoch.toString())
+                  .child(id)
                   .set({
-                    'Name': 'Ismail',
+                    'id': id,
                   'details': text1.text.toString(),
                   })
                   .then((value) {
