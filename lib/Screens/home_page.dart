@@ -47,6 +47,12 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            TextFormField(
+              decoration: InputDecoration(
+                hintText: 'search',
+                border: OutlineInputBorder(),hoverColor: Colors.grey.shade50
+              ),
+            ),
             Expanded(
               child: StreamBuilder(
                   stream: ref.onValue,
