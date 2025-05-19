@@ -81,6 +81,14 @@ String searchquery ='';
                         itemBuilder: (context,index){
                       return ListTile(
                         title: Text(filteredList[index]['details'].toString()),
+                        trailing: PopupMenuButton(itemBuilder: (context) =>(){
+                          PopupMenuItem(
+                            value: 1,
+                            child:ListTile(
+                              
+                            ),
+                          ),
+                        })
                       );
                     });
                   }),
