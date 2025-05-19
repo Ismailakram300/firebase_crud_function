@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 final searchCtrl =TextEditingController();
+String searchquery ='';
 
   FirebaseAuth auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Posts');
@@ -51,6 +52,11 @@ final searchCtrl =TextEditingController();
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
+                onChanged: (value){
+                  setState(() {
+                    searchquery=value.toLowerCase();
+                  });
+                },
                 decoration: InputDecoration(
                   hintText: 'search',
                   border: OutlineInputBorder(),hoverColor: Colors.grey.shade50
@@ -65,11 +71,16 @@ final searchCtrl =TextEditingController();
                     List<dynamic> list =[];
                     list.clear();
                     list= map.values.toList();
+                    List<dynamic> filteredList = list.where((item) {
+                      final details = item['details'].toString().toLowerCase();
+                      return details.contains(searchquery);
+                    }).toList();
+
                     return ListView.builder(
-                        itemCount: snapshot.data!.snapshot.children.length,
+                        itemCount: filteredList.length,
                         itemBuilder: (context,index){
                       return ListTile(
-                        title: Text(list[index]['details'].toString()),
+                        title: Text(filteredList[index]['details'].toString()),
                       );
                     });
                   }),
