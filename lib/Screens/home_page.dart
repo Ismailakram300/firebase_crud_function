@@ -48,7 +48,21 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: StreamBuilder(stream: stream, builder: builder),
+              child: StreamBuilder(
+                  stream: ref.onValue,
+                  builder: (context, AsyncSnapshot<DatabaseEvent>snapshot){
+                    Map<dynamic, dynamic> map = snapshot.data!.snapshot.value as dynamic;
+                    List<dynamic> list =[];
+                    list.clear();
+                    list= map.values.toList();
+                    return ListView.builder(
+                        itemCount: snapshot.data!.snapshot.children.length,
+                        itemBuilder: (context,index){
+                      return ListTile(
+                        title: Text(list[index]['details'].toString()),
+                      );
+                    });
+                  }),
                 //  child: FirebaseAnimatedList(
                 // query: ref,
                 // itemBuilder: (context,snapshot,animation,index,){
@@ -61,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 //       child:  Center(child: Text(snapshot.child('details').value.toString())),
                 //
                 //     ),
-                //   );
+                //   );/
                 // }),
             ),
           ],
