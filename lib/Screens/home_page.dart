@@ -48,10 +48,13 @@ final searchCtrl =TextEditingController();
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(
-              decoration: InputDecoration(
-                hintText: 'search',
-                border: OutlineInputBorder(),hoverColor: Colors.grey.shade50
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'search',
+                  border: OutlineInputBorder(),hoverColor: Colors.grey.shade50
+                ),
               ),
             ),
             Expanded(
