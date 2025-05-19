@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_practice/Screens/add_posts.dart';
 import 'package:firebase_practice/Screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  final ref = FirebaseDatabase.instance.ref('Posts');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,20 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Posts")
+            Expanded(child: FirebaseAnimatedList(
+                query: ref,
+                itemBuilder: (context,snapshot,animation,index,){
+                  return Container(
+                    height: 100,
+                    child: Card(
+
+                      color: Colors.deepPurple.shade50,
+
+                      child:  Center(child: Text(snapshot.child('details').value.toString())),
+
+                    ),
+                  );
+                }))
           ],
         ),
       ),
