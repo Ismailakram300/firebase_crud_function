@@ -27,7 +27,7 @@ class _AddPostsState extends State<AddPosts> {
               controller: text1,
               maxLines: 5,
               decoration: InputDecoration(
-                hintText: "What si in your mindd",
+                hintText: "What si in your mind",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -44,18 +44,17 @@ class _AddPostsState extends State<AddPosts> {
                   isloading = true;
                 });
                 ref
-                  .child('2')
+                  .child(DateTime.now().millisecondsSinceEpoch.toString())
                   .set({
-                    'id': 2,
                     'Name': 'Ismail',
-                    'deatils': text1.text.toString(),
+                  'details': text1.text.toString(),
                   })
                   .then((value) {
                     tostmsg().message("Submission Successfully");
                     setState(() {
                       isloading = false;
                     });
-                  })..onError((error, stack) {
+                  }).onError((error, stack) {
                   tostmsg().message(error.toString());
 
                   setState(() {
