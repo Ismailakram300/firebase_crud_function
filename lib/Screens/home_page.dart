@@ -81,15 +81,15 @@ String searchquery ='';
                         itemBuilder: (context,index){
                       return ListTile(
                         title: Text(filteredList[index]['details'].toString()),
-                        trailing: PopupMenuButton(itemBuilder: (context) =>{
-                          PopupMenuItem(
-                            value: 1,
-                            child:ListTile(
-                              title: Text("Edit"),
-                            ),
-                          ),
-                        })
-                      );
+                        ic
+                        trailing: PopupMenuButton(
+                            itemBuilder: (context)=>[
+                          PopupMenuItem(child: ListTile(
+                            title: Text('Edit'),
+                          ))
+                        ]),
+                        );
+
                     });
                   }),
                 //  child: FirebaseAnimatedList(
