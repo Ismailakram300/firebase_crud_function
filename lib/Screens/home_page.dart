@@ -258,7 +258,7 @@ _remoteConfigFunc() async{
               ),
             ),
           ),
-          title: Text("Update "),
+          title: Text("Update data"),
           actions: [
             TextButton(
               onPressed: () {
