@@ -252,10 +252,7 @@ _remoteConfigFunc() async{
           content: Container(
             child: TextField(
               controller: updateCtrl,
-              decoration: InputDecoration(
-
-                hintText: "",
-              ),
+              decoration: InputDecoration,
             ),
           ),
           title: Text("Update data"),
@@ -264,7 +261,7 @@ _remoteConfigFunc() async{
               onPressed: () {
                 Navigator.pop(context);
                 ref.child(id).update({
-                  'details': updateCtrl
+                  'details': updatetrl
                 })        ;
 
               },
