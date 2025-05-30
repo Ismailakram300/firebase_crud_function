@@ -260,11 +260,13 @@ _remoteConfigFunc() async{
           ),
           title: Text("Update data"),
           actions: [
+
+
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
                 ref.child(id).update({
-                  'details': updateCtrl
+                  's': updateCtrl
                 })        ;
 
               },
