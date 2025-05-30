@@ -120,6 +120,7 @@ _remoteConfigFunc() async{
             },
           ),
         ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
