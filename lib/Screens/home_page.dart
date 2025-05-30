@@ -121,7 +121,13 @@ _remoteConfigFunc() async{
           ),
         ],
       ),
-      floatingActionButt
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPosts()),
+          );
+        },
         child: Icon(Icons.add),
       ),
       body: Center(
