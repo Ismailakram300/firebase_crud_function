@@ -127,7 +127,6 @@ _remoteConfigFunc() async{
             context,
             MaterialPageRoute(builder: (context) => AddPosts()),
           );
-
         },
         child: Icon(Icons.add),
       ),
