@@ -4,6 +4,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firebase_practice/Screens/add_posts.dart';
 import 'package:firebase_practice/Screens/splash_screen.dart';
 import 'package:firebase_practice/uitils/tostmessae.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,13 +15,91 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final searchCtrl = TextEditingController();
   final updateCtrl = TextEditingController();
+  final _remoteConfigration =FirebaseRemoteConfig.instance;
+var showbanner=false;
+var showText="";
+var showDifferentText="";
+
   String searchquery = '';
+_remoteConfigFunc() async{
+
+  await  _remoteConfigration.setConfigSettings(RemoteConfigSettings(
+    fetchTimeout: Duration(seconds: 5),
+    minimumFetchInterval:Duration(seconds: 5),
+  ));
+  await _remoteConfigration.fetchAndActivate();
+  setState(() {
+    showbanner=_remoteConfigration.getBool('showbanner');
+    showText=_remoteConfigration.getString('showText');
+    showDifferentText=_remoteConfigration.getString('showDifferentText');
+    print(showbanner);
+
+  });
+
+  // _remoteConfigration.onConfigUpdated.listen((RemoteConfigUpdate event)  async{
+  //   await _remoteConfigration.setDefaults(
+  //     {
+  //       showText :'This is Deafult',
+  //       "showDifferentText" :"This is Default",
+  //
+  //     }
+  //   );
+  //   await _remoteConfigration.activate();
+  //
+  //
+  // });
+
+}
+//   Future<void> _remoteConfigFunc() async {
+//     // Set default values only once
+//     await _remoteConfigration.setDefaults({
+//       "showText": "This is Default",
+//       "showDifferentText": "This is Default",
+//       "showbanner": false,
+//     });
+//
+//     // Set config settings only once
+//     await _remoteConfigration.setConfigSettings(RemoteConfigSettings(
+//       fetchTimeout: Duration(seconds: 5),
+//       minimumFetchInterval: Duration(hours: 1), // set appropriately
+//     ));
+//
+//     // Fetch and activate once on startup or user action
+//     await _remoteConfigration.fetchAndActivate();
+//
+//     // Now read and apply the config values
+//     setState(() {
+//       showbanner = _remoteConfigration.getBool('showbanner');
+//       showText = _remoteConfigration.getString('showText');
+//       showDifferentText = _remoteConfigration.getString('showDifferentText');
+//       print('showbanner: $showbanner');
+//     });
+//
+//     // Optionally, listen to background updates (not needed unless you really want live updates)
+//     _remoteConfigration.onConfigUpdated.listen((RemoteConfigUpdate event) async {
+//       print('Remote config updated in background');
+//
+//       await _remoteConfigration.activate(); // Just activate — no need to fetch again
+//
+//       setState(() {
+//         showbanner = _remoteConfigration.getBool('showbanner');
+//         showText = _remoteConfigration.getString('showText');
+//         showDifferentText = _remoteConfigration.getString('showDifferentText');
+//       });
+//     });
+//   }
+
 
   FirebaseAuth auth = FirebaseAuth.instance;
   final ref = FirebaseDatabase.instance.ref('Posts');
   @override
+  initState(){
+    super.initState();
+    _remoteConfigFunc();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -56,6 +135,16 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+              child:Container(
+                height: 50,
+                width: double.infinity,
+                child: Card(
+                  color: Colors.cyan.shade50,
+                  child: Center(child: showbanner? Text(showText): Text(showDifferentText)),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextFormField(
