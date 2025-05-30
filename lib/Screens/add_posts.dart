@@ -41,7 +41,7 @@ class _AddPostsState extends State<AddPosts> {
               name: "Submit",
               ontap: () {
 
-                ksknd
+
                 String id=DateTime.now().millisecondsSinceEpoch.toString();
                 setState(() {
                   isloading = true;
