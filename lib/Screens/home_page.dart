@@ -123,7 +123,6 @@ _remoteConfigFunc() async{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => AddPosts()),
           );
