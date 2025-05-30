@@ -258,7 +258,8 @@ _remoteConfigFunc() async{
               ),
             ),
           ),
-          title: Text("Update data"),\z          actions: [
+          title: Text("Update data"),
+          actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
