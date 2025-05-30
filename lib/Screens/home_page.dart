@@ -132,6 +132,7 @@ _remoteConfigFunc() async{
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(padding: EdgeInsets.symmetric(horizontal: 10),
