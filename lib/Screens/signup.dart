@@ -5,6 +5,7 @@ import 'package:firebase_practice/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import '../uitils/tostmessae.dart';
 class Signup extends StatefulWidget {
+  
   Signup({super.key});
 
   @override
